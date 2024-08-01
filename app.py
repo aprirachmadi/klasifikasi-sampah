@@ -84,10 +84,10 @@ elif page == "Menu Utama":
     
         image = preprocess_image(image)
         preds = model.predict(image)
-    
-        pred_class = np.argmax(preds, axis=1)[0]
 
-        st.write(f"Prediksi: {output_dict[pred_class]}")
+        pred_class = (preds > 0.5).astype(int)[0]
+        label = 'Organik' if preds > 0.5 else 'Anorganik'
+        st.write(f"Prediksi: {label} ")
     
         # Record history
         st.session_state.history.append((pred_class))
