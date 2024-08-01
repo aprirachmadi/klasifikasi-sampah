@@ -86,6 +86,8 @@ elif page == "Menu Utama":
         preds = model.predict(image)
 
         pred_class = (preds > 0.5).astype(int)[0]
+        pred_class = 'Organik' if preds > 0.5 else 'Anorganik'
+        
         label = 'Organik' if preds > 0.5 else 'Anorganik'
         st.write(f"Prediksi: {label} ")
     
@@ -122,7 +124,7 @@ elif page == "Menu Utama":
         
     st.write("### Riwayat Prediksi")
     for i, (pred_class) in enumerate(st.session_state.history):
-        st.write(f"{i + 1}. {output_dict[pred_class]}")
+        st.write(f"{i + 1}. {pred_class}")
 
 # About Us Page
 elif page == "Tentang Kami":
